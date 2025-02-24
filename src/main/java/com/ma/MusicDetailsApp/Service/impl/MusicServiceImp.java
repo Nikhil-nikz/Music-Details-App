@@ -29,8 +29,8 @@ public class MusicServiceImp implements MusicService {
 
     @Override
     public MusicAppDto getMusicById(int id) {
-      MusicApp app=  repository.findById(id).orElseThrow(()-> new IdNotFoundException("the music details is not found for id"+id));
-      return MusicMapper.mapTomusicAppDto(app);
+      MusicApp apps=  repository.findById(id).orElseThrow(()-> new IdNotFoundException("the music details is not found for id"+id));
+      return MusicMapper.mapTomusicAppDto(apps);
 
     }
 
@@ -47,6 +47,8 @@ public class MusicServiceImp implements MusicService {
       }
         return list;
     }
+
+
 
     @Override
     public MusicAppDto updateMusic(int id, MusicAppDto dtos) {
