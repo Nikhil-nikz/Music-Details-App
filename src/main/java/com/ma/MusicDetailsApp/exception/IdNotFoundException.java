@@ -1,4 +1,4 @@
-package com.ma.MusicDetailsApp.Exception;
+package com.ma.MusicDetailsApp.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

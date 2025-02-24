@@ -1,9 +1,9 @@
 package com.ma.MusicDetailsApp.MusicRepository;
 
-import com.ma.MusicDetailsApp.Exception.IdNotFoundException;
-import com.ma.MusicDetailsApp.Mapper.MusicMapper;
-import com.ma.MusicDetailsApp.Repository.MusicRepository;
-import com.ma.MusicDetailsApp.Service.impl.MusicServiceImp;
+import com.ma.MusicDetailsApp.exception.IdNotFoundException;
+import com.ma.MusicDetailsApp.mapper.MusicMapper;
+import com.ma.MusicDetailsApp.repository.MusicRepository;
+import com.ma.MusicDetailsApp.service.impl.MusicServiceImp;
 import com.ma.MusicDetailsApp.dto.MusicAppDto;
 import com.ma.MusicDetailsApp.entity.MusicApp;
 import org.junit.jupiter.api.BeforeEach;
@@ -60,11 +60,9 @@ class MusicServiceImpTest {
 
     @Test
     void testSaveMusic() {
-
-        when(musicMapper.mapToMusicApp(musicAppDto)).thenReturn(musicApp); // Ensure correct conversion
+        when(musicMapper.mapToMusicApp(musicAppDto)).thenReturn(musicApp); // Correct conversion
         when(repository.save(musicApp)).thenReturn(musicApp);
         when(musicMapper.mapTomusicAppDto(musicApp)).thenReturn(musicAppDto);
-
 
         MusicAppDto savedMusic = musicService.saveMusic(musicAppDto);
         assertNotNull(savedMusic);
@@ -74,10 +72,8 @@ class MusicServiceImpTest {
 
     @Test
     void testGetMusicByIdFound() {
-
         when(repository.findById(1)).thenReturn(Optional.of(musicApp));
-        when(MusicMapper.mapTomusicAppDto(musicApp)).thenReturn(musicAppDto);
-
+        when(musicMapper.mapTomusicAppDto(musicApp)).thenReturn(musicAppDto);
 
         MusicAppDto music = musicService.getMusicById(1);
         assertNotNull(music);
@@ -87,26 +83,19 @@ class MusicServiceImpTest {
 
     @Test
     void testGetMusicByIdNotFound() {
-
-        when(repository.findById(1)).thenReturn(Optional.empty());
-
-
-        assertThrows(IdNotFoundException.class, () -> musicService.getMusicById(1));
+        when(repository.findById(6)).thenReturn(Optional.empty());
+        assertThrows(IdNotFoundException.class, () -> musicService.getMusicById(6));
     }
 
     @Test
     void testUpdateMusic() {
-
         when(repository.findById(1)).thenReturn(Optional.of(musicApp));
-        when(MusicMapper.mapTomusicAppDto(musicApp)).thenReturn(musicAppDto);
-
+        when(musicMapper.mapTomusicAppDto(musicApp)).thenReturn(musicAppDto);
 
         musicAppDto.setTrackName("Marrikoodinullil");
-        when(repository.save(musicApp)).thenReturn(musicApp); // Ensure save is correctly mocked
+        when(repository.save(any(MusicApp.class))).thenReturn(musicApp);
 
         MusicAppDto updatedMusic = musicService.updateMusic(1, musicAppDto);
-
-
         assertNotNull(updatedMusic);
         assertEquals("Marrikoodinullil", updatedMusic.getTrackName());
         verify(repository, times(1)).save(musicApp);
@@ -114,10 +103,7 @@ class MusicServiceImpTest {
 
     @Test
     void testDeleteMusicById() {
-
         when(repository.findById(1)).thenReturn(Optional.of(musicApp));
-
-
         musicService.deleteMusicById(1);
         verify(repository, times(1)).deleteById(1);
     }

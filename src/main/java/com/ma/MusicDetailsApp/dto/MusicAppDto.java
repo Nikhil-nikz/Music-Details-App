@@ -20,6 +20,11 @@ public class MusicAppDto {
     private int releaseYear;
     private String trackName;
     private String movie;
+//    @Getter
+//    @Setter
+//    private String musicList;
 
 
+//    public MusicAppDto(int id, String singer, String producer, String lyricist, String musicDirector, String language, String genre, int releaseYear, String trackName, String movie) {
+//    }
 }

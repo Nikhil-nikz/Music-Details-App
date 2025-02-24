@@ -1,6 +1,6 @@
-package com.ma.MusicDetailsApp.Controller;
+package com.ma.MusicDetailsApp.controller;
 
-import com.ma.MusicDetailsApp.Service.MusicService;
+import com.ma.MusicDetailsApp.service.MusicService;
 import com.ma.MusicDetailsApp.dto.MusicAppDto;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -46,4 +46,39 @@ public class MusicController {
         service.deleteMusicById(id);
         return ResponseEntity.ok("The details are deleted Successfully");
     }
+
+    @GetMapping("/language/{language}")
+    public ResponseEntity<List<MusicAppDto>> getMusicByLanguage(@PathVariable("language") String language){
+        List<MusicAppDto> list=  service.getMusicByLanguage(language);
+        return ResponseEntity.ok(list);
+    }
+
+
+    @GetMapping("/singer/{singer}")
+    public ResponseEntity<MusicAppDto> getMusicBySinger(@PathVariable("singer") String singer){
+        MusicAppDto list=  service.getMusicBySinger(singer);
+        return ResponseEntity.ok(list);
+    }
+
+
+    @GetMapping("/genre/{genre}")
+    public ResponseEntity<List<MusicAppDto>> getMusicByGenre(@PathVariable("genre") String genre){
+        List<MusicAppDto> list1=  service.getByGenre(genre);
+        return ResponseEntity.ok(list1);
+    }
+
+
+    @GetMapping("/year/{year}")
+    public ResponseEntity<List<MusicAppDto>> getMusicByReleaseYear(@PathVariable("year") int year){
+        List<MusicAppDto> list1=  service.getByReleaseYear(year);
+        return ResponseEntity.ok(list1);
+    }
+
+    @GetMapping("/movie/{movie}")
+    public ResponseEntity<MusicAppDto> getMusicByMovie(@PathVariable("movie") String movie) {
+        MusicAppDto list = service.getMusicByMovie(movie);
+        return ResponseEntity.ok(list);
+
+    }
+
 }

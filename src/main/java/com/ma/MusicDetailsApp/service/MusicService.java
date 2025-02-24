@@ -1,7 +1,6 @@
-package com.ma.MusicDetailsApp.Service;
+package com.ma.MusicDetailsApp.service;
 
 import com.ma.MusicDetailsApp.dto.MusicAppDto;
-import com.ma.MusicDetailsApp.entity.MusicApp;
 
 import java.util.List;
 
@@ -11,4 +10,14 @@ public interface MusicService {
     public List<MusicAppDto> getAllMusic();
     public MusicAppDto updateMusic(int id,MusicAppDto dto);
     public void deleteMusicById(int id);
+    public List<MusicAppDto> getMusicByLanguage(String language);
+
+    public MusicAppDto getMusicBySinger(String singer);
+
+    public List<MusicAppDto> getByGenre(String genre);
+
+    public List<MusicAppDto> getByReleaseYear(int releaseYear);
+
+    public MusicAppDto getMusicByMovie(String movie);
+
 }

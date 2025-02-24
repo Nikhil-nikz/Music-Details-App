@@ -1,4 +1,4 @@
-package com.ma.MusicDetailsApp.Mapper;
+package com.ma.MusicDetailsApp.mapper;
 
 import com.ma.MusicDetailsApp.dto.MusicAppDto;
 import com.ma.MusicDetailsApp.entity.MusicApp;
